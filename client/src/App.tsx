@@ -8,9 +8,11 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { CarProvider } from "./contexts/CarContext";
 import { initImageManifest } from "./lib/imageUtils";
 import { WhatsAppFloat } from "./components/WhatsAppFloat";
+import { ScrollToTop } from "./components/ScrollToTop";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Catalog from "./pages/Catalog";
+import Home from "./pages/Home";
 import CarDetail from "./pages/CarDetail";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -18,7 +20,8 @@ import Contact from "./pages/Contact";
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={Catalog} />
+      <Route path="/" component={Home} />
+      <Route path="/catalogo" component={Catalog} />
       <Route path="/sobre" component={About} />
       <Route path="/contato" component={Contact} />
       <Route path="/car/:id" component={CarDetail} />
@@ -43,6 +46,7 @@ function App() {
                 <Router />
               </main>
               <WhatsAppFloat />
+              <ScrollToTop />
               <Footer />
             </div>
           </TooltipProvider>

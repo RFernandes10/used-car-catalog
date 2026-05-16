@@ -1,0 +1,25 @@
+{
+  "name": "Márcio Veículos",
+  "short_name": "Márcio Veículos",
+  "description": "Carros semi-novos e usados no Rio de Janeiro. Encontre o veículo perfeito na Márcio Veículos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090a",
+  "theme_color": "#08090a",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='192' height='192' viewBox='0 0 192 192'%3E%3Crect width='192' height='192' rx='36' fill='%235e6ad2'/%3E%3Ctext x='96' y='132' text-anchor='middle' font-size='108' fill='white' font-family='system-ui' font-weight='bold'%3EMV%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='512' height='512' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%235e6ad2'/%3E%3Ctext x='256' y='352' text-anchor='middle' font-size='288' fill='white' font-family='system-ui' font-weight='bold'%3EMV%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

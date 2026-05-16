@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Car } from '@/types/car';
 import { CarCard } from './CarCard';
-import { SearchX, Loader2 } from 'lucide-react';
+import { XCircle, SpinnerGap } from '@phosphor-icons/react';
 
 const ITEMS_PER_PAGE = 6;
 
@@ -37,11 +37,21 @@ export const CarList: React.FC<CarListProps> = ({ cars, isLoading = false }) => 
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
-          <p className="text-muted-foreground">Carregando carros...</p>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="bg-card rounded-xl overflow-hidden border border-border/50">
+            <div className="aspect-[4/3] skeleton-shimmer" />
+            <div className="p-4 space-y-3">
+              <div className="h-4 w-2/3 skeleton-shimmer rounded" />
+              <div className="h-3 w-1/2 skeleton-shimmer rounded" />
+              <div className="h-6 w-1/3 skeleton-shimmer rounded" />
+              <div className="flex gap-2">
+                <div className="h-3 w-1/4 skeleton-shimmer rounded" />
+                <div className="h-3 w-1/4 skeleton-shimmer rounded" />
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
     );
   }
@@ -50,7 +60,7 @@ export const CarList: React.FC<CarListProps> = ({ cars, isLoading = false }) => 
     return (
       <div className="flex items-center justify-center py-12 bg-card rounded-2xl">
         <div className="text-center max-w-md">
-          <SearchX className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
+          <XCircle className="w-12 h-12 text-muted-foreground mx-auto mb-4 opacity-50" />
           <h3 className="text-lg font-semibold text-foreground mb-2">Nenhum carro encontrado</h3>
           <p className="text-muted-foreground text-sm">Tente ajustar os filtros para encontrar o carro perfeito.</p>
         </div>
@@ -61,14 +71,14 @@ export const CarList: React.FC<CarListProps> = ({ cars, isLoading = false }) => 
   return (
     <div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {visibleCars.map((car) => (
-          <CarCard key={car.id} car={car} />
+        {visibleCars.map((car, i) => (
+          <CarCard key={car.id} car={car} index={i} />
         ))}
       </div>
 
       {hasMore && (
         <div ref={sentinelRef} className="flex items-center justify-center py-8">
-          <Loader2 className="w-6 h-6 text-muted-foreground animate-spin" />
+          <SpinnerGap className="w-6 h-6 text-muted-foreground animate-spin" />
         </div>
       )}
 

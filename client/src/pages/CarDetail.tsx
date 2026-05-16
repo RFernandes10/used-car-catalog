@@ -1,24 +1,28 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useLocation } from "wouter";
 import { useCars } from "@/contexts/CarContext";
 import { Button } from "@/components/ui/button";
 import { ImageGalleryModal } from "@/components/ImageGalleryModal";
 import { getCarImage, getCarGallery } from "@/lib/imageUtils";
+import { usePageTitle } from "@/hooks/usePageTitle";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { FinancingSimulator } from "@/components/FinancingSimulator";
+import { trackWhatsAppClick } from "@/lib/tracking";
 import {
   ArrowLeft,
   Check,
-  Gauge,
-  Cog,
-  Fuel,
-  ZoomIn,
+  Speedometer,
+  Gear,
+  GasPump,
+  MagnifyingGlassPlus,
   Palette,
   Calendar,
-  Settings,
+  GearSix,
   Hash,
   Car,
-  ImageOff,
-  MessageCircle,
-} from "lucide-react";
+  ImageBroken,
+  WhatsappLogo,
+} from '@phosphor-icons/react';
 
 const condLabel: Record<string, string> = {
   Excellent: "Excelente", "Very Good": "Muito Bom", Good: "Bom", Fair: "Regular",
@@ -43,6 +47,11 @@ export default function CarDetail() {
   const car = getCarById(params.id || "");
   const [mainFailed, setMainFailed] = useState(false);
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
+  usePageTitle(
+    car ? `${car.year} ${car.make} ${car.model} ${car.price > 0 ? `- ${new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 0 }).format(car.price)}` : ""}` : "Carro não encontrado",
+    car ? `${car.year} ${car.make} ${car.model} disponível na Márcio Veículos. ${car.description.slice(0, 120)}` : undefined
+  );
 
   if (!car) {
     return (
@@ -78,13 +87,17 @@ export default function CarDetail() {
       </div>
 
       <div className="container py-8 md:py-12">
+        <Breadcrumbs items={[
+          { label: "Catálogo", href: "/catalogo" },
+          { label: `${car.year} ${car.make} ${car.model}` },
+        ]} />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           <div className="lg:col-span-2">
             <div className="rounded-2xl overflow-hidden shadow-lg mb-6 relative group cursor-pointer" onClick={() => setIsGalleryOpen(true)}>
               {mainFailed ? (
                 <div className="w-full h-96 md:h-[500px] flex items-center justify-center bg-muted">
                   <div className="text-center">
-                    <ImageOff className="w-16 h-16 text-muted-foreground/50 mx-auto mb-2" />
+                    <ImageBroken className="w-16 h-16 text-muted-foreground/50 mx-auto mb-2" />
                     <p className="text-muted-foreground text-sm">Imagem não disponível</p>
                   </div>
                 </div>
@@ -98,7 +111,7 @@ export default function CarDetail() {
               )}
               <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                 <div className="bg-white/90 text-foreground px-4 py-2 rounded-lg flex items-center gap-2 font-semibold">
-                  <ZoomIn className="w-5 h-5" /> Clique para ver a galeria
+                  <MagnifyingGlassPlus className="w-5 h-5" /> Clique para ver a galeria
                 </div>
               </div>
             </div>
@@ -116,24 +129,25 @@ export default function CarDetail() {
             </div>
             <div className="space-y-4 mb-6">
               <div className="flex items-center gap-3">
-                <Gauge className="w-5 h-5 text-primary flex-shrink-0" />
+                <Speedometer className="w-5 h-5 text-primary flex-shrink-0" />
                 <div><p className="text-xs text-muted-foreground">Quilometragem</p><p className="font-semibold text-foreground">{formatMileage(car.mileage)} km</p></div>
               </div>
               <div className="flex items-center gap-3">
-                <Fuel className="w-5 h-5 text-primary flex-shrink-0" />
+                <GasPump className="w-5 h-5 text-primary flex-shrink-0" />
                 <div><p className="text-xs text-muted-foreground">Combustível</p><p className="font-semibold text-foreground">{fuelLabel[car.fuelType] || car.fuelType}</p></div>
               </div>
               <div className="flex items-center gap-3">
-                <Cog className="w-5 h-5 text-primary flex-shrink-0" />
+                <Gear className="w-5 h-5 text-primary flex-shrink-0" />
                 <div><p className="text-xs text-muted-foreground">Transmissão</p><p className="font-semibold text-foreground">{transLabel[car.transmission] || car.transmission}</p></div>
               </div>
             </div>
             <a
               href={`https://wa.me/5521972657221?text=${encodeURIComponent(`Olá, tenho interesse no ${car.year} ${car.make} ${car.model} (${car.id}). Poderia me passar mais informações?`)}`}
               target="_blank" rel="noopener noreferrer"
+              onClick={() => trackWhatsAppClick("detail", { car: `${car.year} ${car.make} ${car.model}` })}
               className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white rounded-lg h-12 text-base font-semibold transition-all hover:scale-[1.02]"
             >
-              <MessageCircle className="w-5 h-5" />
+              <WhatsappLogo weight="fill" className="w-5 h-5" />
               Falar no WhatsApp
             </a>
           </div>
@@ -144,8 +158,8 @@ export default function CarDetail() {
             <h2 className="text-2xl font-bold text-foreground mb-6">Especificações</h2>
             <div className="space-y-4">
               <SpecRow icon={<Car className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Tipo de Carroceria" value={bodyLabel[car.bodyType] || car.bodyType} />
-              <SpecRow icon={<Settings className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Motor" value={car.engineSize} />
-              <SpecRow icon={<Gauge className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Potência" value={`${car.horsepower} cv`} />
+              <SpecRow icon={<GearSix className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Motor" value={car.engineSize} />
+              <SpecRow icon={<Speedometer className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Potência" value={`${car.horsepower} cv`} />
               <SpecRow icon={<Palette className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Cor" value={car.color} />
               <SpecRow icon={<Hash className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Chassi" value={car.vin} mono />
               <SpecRow icon={<Calendar className="w-5 h-5 text-muted-foreground flex-shrink-0" />} label="Ano" value={String(car.year)} />
@@ -168,6 +182,10 @@ export default function CarDetail() {
         <div className="mt-8 bg-card rounded-2xl p-6 shadow-md">
           <h2 className="text-2xl font-bold text-foreground mb-4">Descrição</h2>
           <p className="text-foreground leading-relaxed text-lg">{car.description}</p>
+        </div>
+
+        <div className="mt-8 max-w-lg mx-auto">
+          <FinancingSimulator precoSugerido={car.price} />
         </div>
       </div>
 

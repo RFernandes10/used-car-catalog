@@ -5,23 +5,24 @@
 
 export interface Car {
   id: string;
-  make: string; // Brand (e.g., Toyota, Honda)
-  model: string; // Model name
-  year: number; // Year of manufacture
-  price: number; // Price in USD
-  mileage: number; // Mileage in miles
-  color: string; // Exterior color
-  imageUrl: string; // Main image URL (thumbnail)
-  images: string[]; // Array of all car images
+  make: string;
+  model: string;
+  year: number;
+  price: number;
+  mileage: number;
+  color: string;
+  imageUrl: string;
+  images: string[];
   transmission: 'Manual' | 'Automatic' | 'CVT';
   fuelType: 'Gasoline' | 'Diesel' | 'Hybrid' | 'Electric';
   bodyType: 'Sedan' | 'SUV' | 'Truck' | 'Coupe' | 'Hatchback' | 'Wagon';
-  engineSize: string; // e.g., "2.5L"
+  engineSize: string;
   horsepower: number;
   description: string;
-  features: string[]; // e.g., ['Sunroof', 'Leather Interior', 'Navigation']
+  features: string[];
   condition: 'Excellent' | 'Very Good' | 'Good' | 'Fair';
-  vin: string; // Vehicle Identification Number
+  vin: string;
+  featured?: boolean;
 }
 
 export interface FilterOptions {

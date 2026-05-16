@@ -3,9 +3,11 @@
  */
 
 import React from 'react';
-import { Shield, CheckCircle, Award, Users, TrendingUp, Star, Heart, Wrench } from 'lucide-react';
+import { Shield, CheckCircle, Trophy, Users, TrendUp, Star, Heart, Wrench } from '@phosphor-icons/react';
+import { usePageTitle } from '@/hooks/usePageTitle';
 
 export default function About() {
+  usePageTitle("Sobre Nós", "Conheça a história da Márcio Veículos. Há mais de 10 anos no mercado de semi-novos no Rio de Janeiro com transparência e qualidade.");
   return (
     <div className="min-h-screen bg-background">
       {/* Hero Section */}
@@ -40,7 +42,7 @@ export default function About() {
             </div>
 
             <div className="bg-card rounded-xl p-6 border border-border/50">
-              <TrendingUp className="w-10 h-10 text-primary mb-4" />
+              <TrendUp className="w-10 h-10 text-primary mb-4" />
               <h3 className="font-semibold text-foreground mb-2">Qualidade</h3>
               <p className="text-sm text-muted-foreground">
                 Cada veículo passa por inspeção rigorosa.

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, X, ImageOff } from 'lucide-react';
+import { CaretLeft, CaretRight, X, ImageBroken, MagnifyingGlassPlus, MagnifyingGlassMinus, SpinnerGap } from '@phosphor-icons/react';
 
 interface ImageGalleryModalProps {
   isOpen: boolean;
@@ -16,29 +16,37 @@ export const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [failedImages, setFailedImages] = useState<Set<number>>(new Set());
+  const [loadingImages, setLoadingImages] = useState<Set<number>>(new Set());
+  const [zoomed, setZoomed] = useState(false);
 
   useEffect(() => {
     setCurrentIndex(0);
     setFailedImages(new Set());
+    setLoadingImages(new Set(images.map((_, i) => i)));
+    setZoomed(false);
   }, [isOpen, images]);
 
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-      if (e.key === 'ArrowLeft') goToPrevious();
-      if (e.key === 'ArrowRight') goToNext();
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, currentIndex, images.length]);
-
-  const goToNext = () => setCurrentIndex((prev) => (prev + 1) % images.length);
-  const goToPrevious = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+  const handleLoad = useCallback((index: number) => {
+    setLoadingImages((prev) => { const next = new Set(prev); next.delete(index); return next; });
+  }, []);
 
   const handleError = useCallback((index: number) => {
     setFailedImages((prev) => new Set(prev).add(index));
+    setLoadingImages((prev) => { const next = new Set(prev); next.delete(index); return next; });
   }, []);
+
+  const goToNext = () => {
+    const next = (currentIndex + 1) % images.length;
+    setCurrentIndex(next);
+    setZoomed(false);
+    setLoadingImages((prev) => new Set(prev).add(next));
+  };
+  const goToPrevious = () => {
+    const prev = (currentIndex - 1 + images.length) % images.length;
+    setCurrentIndex(prev);
+    setZoomed(false);
+    setLoadingImages((prevSet) => new Set(prevSet).add(prev));
+  };
 
   if (!isOpen) return null;
 
@@ -51,22 +59,30 @@ export const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
             <X className="w-6 h-6" />
           </button>
 
-          <div className="flex-1 flex items-center justify-center overflow-hidden bg-black">
+          <div className={`flex-1 flex items-center justify-center overflow-hidden bg-black ${zoomed ? "cursor-zoom-out" : "cursor-zoom-in"}`}
+            onClick={() => setZoomed(!zoomed)}>
             {failedImages.has(currentIndex) ? (
-              <ImageOff className="w-16 h-16 text-white/50" />
+              <ImageBroken className="w-16 h-16 text-white/50" />
+            ) : loadingImages.has(currentIndex) ? (
+              <SpinnerGap className="w-12 h-12 text-white/50 animate-spin" />
             ) : (
               <img
                 src={images[currentIndex]}
                 alt={`${carTitle} - ${currentIndex + 1}`}
-                className="max-w-full max-h-full object-contain"
+                className={`transition-all duration-200 ${zoomed ? "max-w-none max-h-none w-full h-full object-contain scale-150" : "max-w-full max-h-full object-contain"}`}
+                onLoad={() => handleLoad(currentIndex)}
                 onError={() => handleError(currentIndex)}
               />
             )}
           </div>
+          <button onClick={() => setZoomed(!zoomed)}
+            className="absolute top-4 left-4 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full transition-colors">
+            {zoomed ? <MagnifyingGlassMinus className="w-5 h-5" /> : <MagnifyingGlassPlus className="w-5 h-5" />}
+          </button>
 
           <div className="bg-black/90 px-4 py-4 flex items-center justify-between">
             <button onClick={goToPrevious} className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors disabled:opacity-50" disabled={images.length <= 1}>
-              <ChevronLeft className="w-6 h-6" />
+              <CaretLeft className="w-6 h-6" />
             </button>
 
             <div className="flex-1 mx-4">
@@ -77,7 +93,7 @@ export const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
                     className={`flex-shrink-0 w-16 h-16 rounded border-2 overflow-hidden transition-all ${index === currentIndex ? 'border-accent ring-2 ring-accent' : 'border-white/30 hover:border-white/50'}`}>
                     {failedImages.has(index) ? (
                       <div className="w-full h-full flex items-center justify-center bg-black/50">
-                        <ImageOff className="w-4 h-4 text-white/30" />
+                        <ImageBroken className="w-4 h-4 text-white/30" />
                       </div>
                     ) : (
                       <img src={image} alt={`Thumb ${index + 1}`} className="w-full h-full object-cover" onError={() => handleError(index)} />
@@ -88,7 +104,7 @@ export const ImageGalleryModal: React.FC<ImageGalleryModalProps> = ({
             </div>
 
             <button onClick={goToNext} className="flex items-center justify-center w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 text-white transition-colors disabled:opacity-50" disabled={images.length <= 1}>
-              <ChevronRight className="w-6 h-6" />
+              <CaretRight className="w-6 h-6" />
             </button>
           </div>
 

@@ -1,5 +1,6 @@
-import { Phone, Mail, MapPin, Clock, MessageCircle, Zap } from 'lucide-react';
+import { Phone, Envelope, MapPin, Clock, WhatsappLogo, Lightning } from '@phosphor-icons/react';
 import { Button } from '@/components/ui/button';
+import { usePageTitle } from '@/hooks/usePageTitle';
 
 const WHATSAPP_NUMBER = "5521972657221";
 const WHATSAPP_URL = `https://wa.me/${WHATSAPP_NUMBER}`;
@@ -18,6 +19,7 @@ function waLink(msg: string) {
 }
 
 export default function Contact() {
+  usePageTitle("Contato", "Fale com a Márcio Veículos pelo WhatsApp. Estamos prontos para ajudar você a encontrar o carro seminovo perfeito.");
   return (
     <div className="min-h-screen bg-background">
       <section className="bg-gradient-to-br from-primary/5 via-background to-accent/5 py-16 md:py-20 border-b border-border">
@@ -42,7 +44,7 @@ export default function Contact() {
                 <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                   className="flex items-start gap-4 group">
                   <div className="bg-green-600/15 p-3 rounded-lg group-hover:bg-green-600/25 transition-colors">
-                    <MessageCircle className="w-6 h-6 text-green-500" />
+                    <WhatsappLogo weight="fill" className="w-6 h-6 text-green-500" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">WhatsApp</h3>
@@ -77,7 +79,7 @@ export default function Contact() {
 
                 <a href="mailto:robertofernandes144@gmail.com" className="flex items-start gap-4 group">
                   <div className="bg-primary/10 p-3 rounded-lg group-hover:bg-primary/20 transition-colors">
-                    <Mail className="w-6 h-6 text-primary" />
+                    <Envelope className="w-6 h-6 text-primary" />
                   </div>
                   <div>
                     <h3 className="font-semibold text-foreground">E-mail</h3>
@@ -101,7 +103,7 @@ export default function Contact() {
 
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
                 className="mt-8 flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white rounded-xl px-6 py-4 font-semibold text-lg transition-all hover:scale-[1.02]">
-                <MessageCircle className="w-7 h-7" />
+                    <WhatsappLogo weight="fill" className="w-7 h-7" />
                 Falar com {SELLER_NAME} no WhatsApp
               </a>
             </div>
@@ -109,7 +111,7 @@ export default function Contact() {
             <div className="bg-card rounded-2xl p-8 border border-border/50">
               <div className="text-center mb-8">
                 <div className="w-16 h-16 bg-green-600/15 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Zap className="w-8 h-8 text-green-500" />
+                    <Lightning weight="fill" className="w-8 h-8 text-green-500" />
                 </div>
                 <h2 className="text-2xl font-bold text-foreground mb-2">Atendimento via WhatsApp</h2>
                 <p className="text-muted-foreground">
@@ -126,7 +128,7 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 w-full text-left bg-background hover:bg-green-600/10 border border-border/50 hover:border-green-500/30 rounded-xl px-5 py-4 transition-all group"
                   >
-                    <MessageCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    <WhatsappLogo weight="fill" className="w-5 h-5 text-green-500 flex-shrink-0" />
                     <span className="text-foreground font-medium group-hover:text-green-400 transition-colors">
                       {item.label}
                     </span>
@@ -142,7 +144,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 rounded-lg px-6 py-3 font-medium transition-all"
                 >
-                  <MessageCircle className="w-5 h-5" />
+                  <WhatsappLogo weight="fill" className="w-5 h-5" />
                   Falar Agora
                 </a>
               </div>

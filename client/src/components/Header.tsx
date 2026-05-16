@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Car, Menu, X, Sun, Moon } from 'lucide-react';
+import { Car, List, X, Sun, Moon } from '@phosphor-icons/react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export const Header: React.FC = () => {
@@ -16,7 +16,8 @@ export const Header: React.FC = () => {
   const isActive = (path: string) => location === path;
 
   const navLinks = [
-    { href: '/', label: 'Catálogo' },
+    { href: '/', label: 'Início' },
+    { href: '/catalogo', label: 'Catálogo' },
     { href: '/sobre', label: 'Sobre' },
     { href: '/contato', label: 'Contato' },
   ];
@@ -69,7 +70,7 @@ export const Header: React.FC = () => {
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Menu"
         >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <List className="w-6 h-6" />}
         </button>
       </div>
 

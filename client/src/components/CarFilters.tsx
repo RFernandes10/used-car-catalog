@@ -9,7 +9,7 @@ import { useCars } from '@/contexts/CarContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { X, Search, Filter, SlidersHorizontal } from 'lucide-react';
+import { X, MagnifyingGlass, Funnel, Sliders } from '@phosphor-icons/react';
 
 interface CarFiltersProps {
   onFiltersChange: (filters: SearchFilters) => void;
@@ -62,14 +62,14 @@ export const CarFilters: React.FC<CarFiltersProps> = ({ onFiltersChange, current
     <div className="bg-card text-card-foreground rounded-xl p-4 sm:p-5 border border-border/50">
       {/* Header */}
       <div className="flex items-center gap-2 mb-5">
-        <Filter className="w-5 h-5 text-primary" />
+        <Funnel className="w-5 h-5 text-primary" />
         <h3 className="font-semibold text-foreground">Filtros</h3>
       </div>
 
       {/* Search Bar */}
       <div className="mb-5">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
+          <MagnifyingGlass className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none" />
           <Input
             type="text"
             placeholder="Buscar por marca, modelo..."
@@ -139,7 +139,7 @@ export const CarFilters: React.FC<CarFiltersProps> = ({ onFiltersChange, current
         onClick={() => setShowAdvanced(!showAdvanced)}
         className="text-xs font-medium text-primary hover:text-primary/80 transition-colors mb-3 flex items-center gap-1"
       >
-        <SlidersHorizontal className="w-3.5 h-3.5" />
+        <Sliders className="w-3.5 h-3.5" />
         {showAdvanced ? 'Ocultar filtros' : 'Mais filtros'}
       </button>
 

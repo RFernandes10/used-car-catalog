@@ -4,7 +4,7 @@
 
 import React from 'react';
 import { Link } from 'wouter';
-import { Phone, Mail, MapPin, Menu, Info, MessageCircle } from 'lucide-react';
+import { Phone, Envelope, MapPin, List, Info, WhatsappLogo } from '@phosphor-icons/react';
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -27,27 +27,18 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-sm">
               <li>
                 <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                  <Menu className="w-4 h-4" />
-                  Ver Estoque
+                  <List className="w-4 h-4" /> Catálogo
                 </Link>
               </li>
               <li>
                 <Link href="/sobre" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                  <Info className="w-4 h-4" />
-                  Quem Somos
+                  <Info className="w-4 h-4" /> Sobre
                 </Link>
               </li>
               <li>
                 <Link href="/contato" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                  <MessageCircle className="w-4 h-4" />
-                  Fale Conosco
+                  <WhatsappLogo weight="fill" className="w-4 h-4" /> Fale Conosco
                 </Link>
-              </li>
-              <li>
-                <a href="#" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-                  <Info className="w-4 h-4" />
-                  Política de Privacidade
-                </a>
               </li>
             </ul>
           </div>
@@ -61,7 +52,7 @@ export const Footer: React.FC = () => {
                 <span className="text-muted-foreground">(21) 97265-7221</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-muted-foreground flex-shrink-0" />
+                <Envelope className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                 <span className="text-muted-foreground">robertofernandes144@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">

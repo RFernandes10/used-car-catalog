@@ -26,6 +26,7 @@ export const CARS: Car[] = [
     features: ["Backup Camera", "Bluetooth", "Cruise Control", "Power Windows"],
     condition: "Excellent",
     vin: "4T1BF1AK5CU123456",
+    featured: true,
   },
   {
     id: "2",
@@ -52,6 +53,7 @@ export const CARS: Car[] = [
     features: ["Sunroof", "Alloy Wheels", "Air Conditioning", "Bluetooth"],
     condition: "Very Good",
     vin: "2HGCV52K7LH123456",
+    featured: true,
   },
   {
     id: "3",
@@ -83,6 +85,7 @@ export const CARS: Car[] = [
     ],
     condition: "Good",
     vin: "1FTFW1ET5DFC123456",
+    featured: true,
   },
   {
     id: "4",

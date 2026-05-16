@@ -17,6 +17,7 @@ import {
   Hash,
   Car,
   ImageOff,
+  MessageCircle,
 } from "lucide-react";
 
 const condLabel: Record<string, string> = {
@@ -127,9 +128,14 @@ export default function CarDetail() {
                 <div><p className="text-xs text-muted-foreground">Transmissão</p><p className="font-semibold text-foreground">{transLabel[car.transmission] || car.transmission}</p></div>
               </div>
             </div>
-            <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90 h-12 text-base font-semibold">
-              Falar com Vendedor
-            </Button>
+            <a
+              href={`https://wa.me/5521972657221?text=${encodeURIComponent(`Olá, tenho interesse no ${car.year} ${car.make} ${car.model} (${car.id}). Poderia me passar mais informações?`)}`}
+              target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white rounded-lg h-12 text-base font-semibold transition-all hover:scale-[1.02]"
+            >
+              <MessageCircle className="w-5 h-5" />
+              Falar no WhatsApp
+            </a>
           </div>
         </div>
 

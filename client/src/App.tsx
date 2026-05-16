@@ -7,6 +7,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { CarProvider } from "./contexts/CarContext";
 import { initImageManifest } from "./lib/imageUtils";
+import { WhatsAppFloat } from "./components/WhatsAppFloat";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Catalog from "./pages/Catalog";
@@ -41,6 +42,7 @@ function App() {
               <main className="flex-1">
                 <Router />
               </main>
+              <WhatsAppFloat />
               <Footer />
             </div>
           </TooltipProvider>

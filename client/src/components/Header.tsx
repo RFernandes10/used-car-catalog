@@ -5,11 +5,13 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Car, Menu, X } from 'lucide-react';
+import { Car, Menu, X, Sun, Moon } from 'lucide-react';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export const Header: React.FC = () => {
   const [location] = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const isActive = (path: string) => location === path;
 
@@ -51,6 +53,17 @@ export const Header: React.FC = () => {
             </Link>
           ))}
         </nav>
+
+        {/* Theme Toggle */}
+        {toggleTheme && (
+          <button
+            onClick={toggleTheme}
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+        )}
 
         {/* Mobile Menu Button */}
         <button

@@ -17,7 +17,7 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="font-semibold text-base mb-3">Márcio Veículos</h3>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Sua fonte confiável para veículos seminovos de qualidade. Inspecionamos cada carro para garantir confiabilidade e valor.
+              Cada veículo do nosso estoque passa por uma inspeção rigorosa e por um processo completo de higienização, garantindo a máxima confiabilidade, segurança e o valor que você merece.
             </p>
           </div>
 
@@ -58,15 +58,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-2.5 text-sm">
               <div className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                <span className="text-muted-foreground">(21) 99999-9999</span>
+                <span className="text-muted-foreground">(21) 97265-7221</span>
               </div>
               <div className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                <span className="text-muted-foreground">vendas@marcioveiculos.com.br</span>
+                <span className="text-muted-foreground">robertofernandes144@gmail.com</span>
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                <span className="text-muted-foreground">Rio de Janeiro, RJ</span>
+                <span className="text-muted-foreground">Rio de Janeiro, Realengo - RJ</span>
               </div>
             </div>
           </div>

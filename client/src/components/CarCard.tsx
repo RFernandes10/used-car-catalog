@@ -27,10 +27,9 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
   };
 
   return (
-    <Link href={`/car/${car.id}`}>
-      <a className="group block h-full">
-        <div className="bg-card text-card-foreground rounded-xl overflow-hidden border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200 hover:-translate-y-0.5 h-full flex flex-col">
-          <div className="relative overflow-hidden bg-muted aspect-[4/3]">
+    <Link href={`/car/${car.id}`} className="group block h-full">
+      <div className="bg-card text-card-foreground rounded-xl overflow-hidden border border-border/50 hover:border-primary/30 hover:shadow-lg hover:shadow-primary/5 transition-all duration-200 hover:-translate-y-0.5 h-full flex flex-col">
+        <div className="relative overflow-hidden bg-muted aspect-[4/3]">
             {imgFailed ? (
               <div className="w-full h-full flex items-center justify-center bg-muted">
                 <ImageOff className="w-10 h-10 text-muted-foreground/50" />
@@ -81,7 +80,6 @@ export const CarCard: React.FC<CarCardProps> = ({ car }) => {
             </div>
           </div>
         </div>
-      </a>
     </Link>
   );
 };

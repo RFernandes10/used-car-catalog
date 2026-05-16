@@ -31,10 +31,10 @@ export function ThemeProvider({
 
   useEffect(() => {
     const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
+    if (theme === "light") {
+      root.classList.add("light");
     } else {
-      root.classList.remove("dark");
+      root.classList.remove("light");
     }
 
     if (switchable) {

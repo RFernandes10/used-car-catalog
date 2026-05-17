@@ -18,15 +18,22 @@ export function FinancingSimulator({ precoSugerido }: FinancingSimulatorProps) {
   const [parcelas, setParcelas] = useState(48);
   const [taxa, setTaxa] = useState(1.5);
   const [calculado, setCalculado] = useState(false);
+  const [erro, setErro] = useState("");
 
-  const valorEntrada = preco * (entrada / 100);
+  const valorEntrada = preco * (Math.min(Math.max(entrada, 0), 100) / 100);
   const valorFinanciado = preco - valorEntrada;
-  const valorParcela = calcularParcela(valorFinanciado, taxa, parcelas);
+  const valorParcela = calcularParcela(valorFinanciado, Math.max(taxa, 0), parcelas);
   const totalPago = valorParcela * parcelas;
   const totalJuros = totalPago - valorFinanciado;
 
   const handleCalcular = () => {
-    if (preco > 0 && parcelas > 0) setCalculado(true);
+    setErro("");
+    if (preco <= 0) { setErro("O valor do veículo deve ser maior que zero."); return; }
+    if (entrada < 0 || entrada > 100) { setErro("A entrada deve estar entre 0% e 100%."); return; }
+    if (taxa < 0) { setErro("A taxa de juros não pode ser negativa."); return; }
+    if (parcelas <= 0) { setErro("Selecione um número de parcelas válido."); return; }
+    if (entrada >= 100) { setErro("Com 100% de entrada, não há valor a financiar."); return; }
+    setCalculado(true);
   };
 
   return (
@@ -92,7 +99,11 @@ export function FinancingSimulator({ precoSugerido }: FinancingSimulatorProps) {
         <Calculator className="w-4 h-4" /> Calcular Parcelas
       </button>
 
-      {calculado && (
+      {erro && (
+        <p className="mt-3 text-sm text-destructive text-center animate-fade-in-up">{erro}</p>
+      )}
+
+      {calculado && !erro && (
         <div className="mt-6 pt-6 border-t border-border animate-fade-in-up">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-4">
             <div className="bg-background rounded-lg p-3 text-center">

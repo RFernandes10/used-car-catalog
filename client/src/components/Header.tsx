@@ -5,7 +5,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'wouter';
-import { Car, List, X, Sun, Moon } from '@phosphor-icons/react';
+import { Car, List, X, Sun, Moon, Heart, ArrowsLeftRight } from '@phosphor-icons/react';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export const Header: React.FC = () => {
@@ -36,31 +36,51 @@ export const Header: React.FC = () => {
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm font-medium transition-colors ${
+                  isActive(link.href)
+                    ? 'text-primary'
+                    : 'text-muted-foreground hover:text-foreground'
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
             <Link
-              key={link.href}
-              href={link.href}
-              className={`text-sm font-medium transition-colors ${
-                isActive(link.href)
-                  ? 'text-primary'
-                  : 'text-muted-foreground hover:text-foreground'
+              href="/favoritos"
+              className={`text-sm font-medium transition-colors flex items-center gap-1 ${
+                isActive("/favoritos") ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
               }`}
             >
-              {link.label}
+              <Heart weight={isActive("/favoritos") ? "fill" : "regular"} className="w-3.5 h-3.5" />
+              Favoritos
             </Link>
-          ))}
-        </nav>
+            <Link
+              href="/comparar"
+              className={`text-sm font-medium transition-colors flex items-center gap-1 ${
+                isActive("/comparar") ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <ArrowsLeftRight className="w-3.5 h-3.5" />
+              Comparar
+            </Link>
+          </nav>
 
         {/* Theme Toggle */}
         {toggleTheme && (
           <button
             onClick={toggleTheme}
-            className="p-2 text-muted-foreground hover:text-foreground transition-colors"
-            aria-label="Toggle theme"
+            className="p-2 text-muted-foreground hover:text-foreground transition-colors hover:rotate-12"
+            aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}
           >
-            {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            <span className="block transition-transform duration-300 ease-out">
+              {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </span>
           </button>
         )}
 
@@ -92,6 +112,26 @@ export const Header: React.FC = () => {
                 {link.label}
               </Link>
             ))}
+            <Link
+              href="/favoritos"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-base font-medium transition-colors py-2 flex items-center gap-2 ${
+                isActive("/favoritos") ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Heart weight={isActive("/favoritos") ? "fill" : "regular"} className="w-4 h-4" />
+              Favoritos
+            </Link>
+            <Link
+              href="/comparar"
+              onClick={() => setIsMobileMenuOpen(false)}
+              className={`text-base font-medium transition-colors py-2 flex items-center gap-2 ${
+                isActive("/comparar") ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <ArrowsLeftRight className="w-4 h-4" />
+              Comparar
+            </Link>
           </nav>
         </div>
       )}

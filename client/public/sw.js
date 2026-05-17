@@ -27,6 +27,8 @@ self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
+  if (url.protocol !== "http:" && url.protocol !== "https:") return;
+
   if (url.pathname.startsWith("/images/")) {
     event.respondWith(
       caches.open(CACHE).then((cache) =>
@@ -41,7 +43,8 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(
     caches.match(request).then((cached) => cached || fetch(request).then((res) => {
       if (res.ok && request.method === "GET") {
-        caches.open(CACHE).then((cache) => cache.put(request, res.clone()));
+        const cloned = res.clone();
+        caches.open(CACHE).then((cache) => cache.put(request, cloned));
       }
       return res;
     }))

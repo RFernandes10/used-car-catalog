@@ -78,6 +78,13 @@ export const CarProvider: React.FC<{ children: React.ReactNode }> = ({ children 
         }
       }
 
+      // Filter by VIN
+      if (filters.vin) {
+        if (!car.vin.toLowerCase().includes(filters.vin.toLowerCase())) {
+          return false;
+        }
+      }
+
       return true;
     });
   }, [filters]);

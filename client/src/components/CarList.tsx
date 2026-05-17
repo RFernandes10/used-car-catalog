@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { Car } from '@/types/car';
 import { CarCard } from './CarCard';
 import { XCircle, SpinnerGap } from '@phosphor-icons/react';
@@ -13,6 +13,7 @@ interface CarListProps {
 export const CarList: React.FC<CarListProps> = ({ cars, isLoading = false }) => {
   const [page, setPage] = useState(1);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   const visibleCars = cars.slice(0, page * ITEMS_PER_PAGE);
   const hasMore = visibleCars.length < cars.length;
@@ -34,6 +35,39 @@ export const CarList: React.FC<CarListProps> = ({ cars, isLoading = false }) => 
   useEffect(() => {
     setPage(1);
   }, [cars.length]);
+
+  const handleGridKeyDown = useCallback((e: React.KeyboardEvent) => {
+    const grid = gridRef.current;
+    if (!grid) return;
+    const cards = grid.querySelectorAll<HTMLAnchorElement>('[role="article"]');
+    const currentIndex = Array.from(cards).findIndex((el) => el === document.activeElement);
+    if (currentIndex === -1) return;
+
+    let nextIndex = currentIndex;
+    const cols = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1;
+
+    switch (e.key) {
+      case "ArrowRight":
+        nextIndex = Math.min(currentIndex + 1, cards.length - 1);
+        break;
+      case "ArrowLeft":
+        nextIndex = Math.max(currentIndex - 1, 0);
+        break;
+      case "ArrowDown":
+        nextIndex = Math.min(currentIndex + cols, cards.length - 1);
+        break;
+      case "ArrowUp":
+        nextIndex = Math.max(currentIndex - cols, 0);
+        break;
+      default:
+        return;
+    }
+
+    if (nextIndex !== currentIndex) {
+      e.preventDefault();
+      (cards[nextIndex] as HTMLAnchorElement)?.focus();
+    }
+  }, []);
 
   if (isLoading) {
     return (
@@ -70,9 +104,17 @@ export const CarList: React.FC<CarListProps> = ({ cars, isLoading = false }) => 
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        ref={gridRef}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        role="list"
+        aria-label="Lista de veículos"
+        onKeyDown={handleGridKeyDown}
+      >
         {visibleCars.map((car, i) => (
-          <CarCard key={car.id} car={car} index={i} />
+          <div key={car.id} role="listitem">
+            <CarCard car={car} index={i} />
+          </div>
         ))}
       </div>
 

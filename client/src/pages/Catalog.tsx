@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { useCars } from "@/contexts/CarContext";
 import { SearchFilters } from "@/types/car";
 import { CarFilters } from "@/components/CarFilters";
@@ -16,15 +16,65 @@ const SORT_OPTIONS: { value: SortOption; label: string }[] = [
   { value: "mileage-asc", label: "Menor Km" },
 ];
 
+const SESSION_KEY = "catalog-state";
+
+interface CatalogState {
+  filters: SearchFilters;
+  sortBy: SortOption;
+  scrollY: number;
+}
+
+function loadState(): CatalogState | null {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function saveState(state: Partial<CatalogState>) {
+  try {
+    const current = loadState() ?? {} as CatalogState;
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify({ ...current, ...state }));
+  } catch { /* noop */ }
+}
+
 export default function Catalog() {
   usePageTitle("Catálogo", "Confira nossa seleção de veículos semi-novos. Filtre por marca, modelo, preço e encontre o carro ideal no Rio de Janeiro.");
   const { filteredCars, setFilters, filters } = useCars();
   const [isLoading] = useState(false);
-  const [sortBy, setSortBy] = useState<SortOption>("default");
 
-  const handleFiltersChange = (newFilters: SearchFilters) => {
+  const saved = useMemo(() => loadState(), []);
+  const [sortBy, setSortBy] = useState<SortOption>(saved?.sortBy ?? "default");
+
+  const handleFiltersChange = useCallback((newFilters: SearchFilters) => {
     setFilters(newFilters);
-  };
+    saveState({ filters: newFilters });
+  }, [setFilters]);
+
+  useEffect(() => {
+    if (saved?.scrollY) {
+      requestAnimationFrame(() => window.scrollTo(0, saved.scrollY));
+    }
+  }, []);
+
+  useEffect(() => {
+    const handleSave = () => saveState({ scrollY: window.scrollY });
+    window.addEventListener("beforeunload", handleSave);
+    return () => {
+      handleSave();
+      window.removeEventListener("beforeunload", handleSave);
+    };
+  }, []);
+
+  useEffect(() => {
+    saveState({ sortBy });
+  }, [sortBy]);
+
+  useEffect(() => {
+    if (saved?.filters) setFilters(saved.filters);
+  }, []);
 
   const sortedCars = useMemo(() => {
     const cars = [...filteredCars];

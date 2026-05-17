@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { lazy, Suspense, useEffect } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
@@ -6,22 +6,38 @@ import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { CarProvider } from "./contexts/CarContext";
+import { WishlistProvider } from "./contexts/WishlistContext";
+import { ComparisonProvider } from "./contexts/ComparisonContext";
 import { initImageManifest } from "./lib/imageUtils";
 import { WhatsAppFloat } from "./components/WhatsAppFloat";
 import { ScrollToTop } from "./components/ScrollToTop";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Catalog from "./pages/Catalog";
-import Home from "./pages/Home";
-import CarDetail from "./pages/CarDetail";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import { SpinnerGap } from "@phosphor-icons/react";
+
+const Home = lazy(() => import("./pages/Home"));
+const Catalog = lazy(() => import("./pages/Catalog"));
+const CarDetail = lazy(() => import("./pages/CarDetail"));
+const About = lazy(() => import("./pages/About"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Favorites = lazy(() => import("./pages/Favorites"));
+const Comparison = lazy(() => import("./pages/Comparison"));
+
+function PageLoader() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <SpinnerGap className="w-8 h-8 text-primary animate-spin" />
+    </div>
+  );
+}
 
 function Router() {
   return (
     <Switch>
       <Route path="/" component={Home} />
       <Route path="/catalogo" component={Catalog} />
+      <Route path="/favoritos" component={Favorites} />
+      <Route path="/comparar" component={Comparison} />
       <Route path="/sobre" component={About} />
       <Route path="/contato" component={Contact} />
       <Route path="/car/:id" component={CarDetail} />
@@ -38,18 +54,27 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark" switchable>
         <CarProvider>
-          <TooltipProvider>
-            <Toaster />
-            <div className="flex flex-col min-h-screen">
-              <Header />
-              <main className="flex-1">
-                <Router />
-              </main>
-              <WhatsAppFloat />
-              <ScrollToTop />
-              <Footer />
-            </div>
-          </TooltipProvider>
+          <WishlistProvider>
+            <ComparisonProvider>
+              <TooltipProvider>
+                <Toaster />
+                <a href="#main-content" className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg">
+                  Pular para o conteúdo
+                </a>
+                <div className="flex flex-col min-h-screen">
+                  <Header />
+                  <main id="main-content" className="flex-1">
+                    <Suspense fallback={<PageLoader />}>
+                      <Router />
+                    </Suspense>
+                  </main>
+                  <WhatsAppFloat />
+                  <ScrollToTop />
+                  <Footer />
+                </div>
+              </TooltipProvider>
+            </ComparisonProvider>
+          </WishlistProvider>
         </CarProvider>
       </ThemeProvider>
     </ErrorBoundary>

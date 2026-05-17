@@ -146,6 +146,18 @@ export const CarFilters: React.FC<CarFiltersProps> = ({ onFiltersChange, current
       {/* Advanced Filters */}
       {showAdvanced && (
         <div className="space-y-3 pt-3 border-t border-border">
+          {/* VIN Search */}
+          <div>
+            <label className="text-xs font-medium text-muted-foreground mb-1 block">Buscar por VIN</label>
+            <Input
+              type="text"
+              placeholder="Ex: 4T1BF1AK5CU123456"
+              value={localFilters.vin || ''}
+              onChange={(e) => handleFilterChange('vin', e.target.value || undefined)}
+              className="bg-background text-foreground h-8 text-sm"
+            />
+          </div>
+
           {/* Year Range */}
           <div className="grid grid-cols-2 gap-2">
             <div>

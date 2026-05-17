@@ -46,4 +46,5 @@ export interface SearchFilters {
   bodyType?: string;
   fuelType?: string;
   searchTerm?: string;
+  vin?: string;
 }

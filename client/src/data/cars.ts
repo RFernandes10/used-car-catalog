@@ -22,7 +22,7 @@ export const CARS: Car[] = [
     engineSize: "2.5L",
     horsepower: 203,
     description:
-      "Well-maintained Toyota Camry with low mileage. Perfect for daily commuting with excellent fuel efficiency.",
+      "Toyota Camry bem conservado e com baixa quilometragem. Perfeito para deslocamentos diários, com excelente economia de combustível.",
     features: ["Backup Camera", "Bluetooth", "Cruise Control", "Power Windows"],
     condition: "Excellent",
     vin: "4T1BF1AK5CU123456",
@@ -302,7 +302,8 @@ export const CARS: Car[] = [
     price: 22990,
     mileage: 12000,
     color: "Red",
-    imageUrl: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1000&q=80",
       "https://images.unsplash.com/photo-1553440569-bcc63803a83d?w=1000&q=80",
@@ -315,7 +316,12 @@ export const CARS: Car[] = [
     horsepower: 130,
     description:
       "Fiat Pulse novo, completo e econômico. Perfeito para o dia a dia na cidade com estilo esportivo.",
-    features: ["Central Multimídia", "Câmera de Ré", "Ar Condicionado", "Direção Elétrica"],
+    features: [
+      "Central Multimídia",
+      "Câmera de Ré",
+      "Ar Condicionado",
+      "Direção Elétrica",
+    ],
     condition: "Excellent",
     vin: "9BFBZ55C0P8123456",
   },
@@ -327,7 +333,8 @@ export const CARS: Car[] = [
     price: 35990,
     mileage: 25000,
     color: "White",
-    imageUrl: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1000&q=80",
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1000&q=80",
@@ -340,7 +347,12 @@ export const CARS: Car[] = [
     horsepower: 170,
     description:
       "Jeep Compass robusto com motor turbo diesel. Ideal para estradas e terrenos difíceis.",
-    features: ["Tração 4x4", "Ar Condicionado Digital", "Bancos de Couro", "Sistema de Som Premium"],
+    features: [
+      "Tração 4x4",
+      "Ar Condicionado Digital",
+      "Bancos de Couro",
+      "Sistema de Som Premium",
+    ],
     condition: "Very Good",
     vin: "9BMFP5940P9123456",
   },
@@ -352,7 +364,8 @@ export const CARS: Car[] = [
     price: 19990,
     mileage: 15000,
     color: "Blue",
-    imageUrl: "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=1000&q=80",
       "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=1000&q=80",
@@ -365,7 +378,12 @@ export const CARS: Car[] = [
     horsepower: 114,
     description:
       "Nissan Kicks completo e econômico. Excelente custo-benefício para uso urbano.",
-    features: ["Câmera 360°", "Apple CarPlay", "Sensor de Estacionamento", "Controle de Cruzeiro"],
+    features: [
+      "Câmera 360°",
+      "Apple CarPlay",
+      "Sensor de Estacionamento",
+      "Controle de Cruzeiro",
+    ],
     condition: "Excellent",
     vin: "3N1EB7B34PM123456",
   },
@@ -377,7 +395,8 @@ export const CARS: Car[] = [
     price: 17990,
     mileage: 38000,
     color: "Orange",
-    imageUrl: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1000&q=80",
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1000&q=80",
@@ -390,7 +409,12 @@ export const CARS: Car[] = [
     horsepower: 120,
     description:
       "Renault Duster espaçoso e robusto. Perfeito para quem precisa de espaço e durabilidade.",
-    features: ["Ar Condicionado", "Direção Hidráulica", "Vidros Elétricos", "Trava Elétrica"],
+    features: [
+      "Ar Condicionado",
+      "Direção Hidráulica",
+      "Vidros Elétricos",
+      "Trava Elétrica",
+    ],
     condition: "Good",
     vin: "9BGFB1A47BM123456",
   },
@@ -402,7 +426,8 @@ export const CARS: Car[] = [
     price: 49990,
     mileage: 35000,
     color: "Black",
-    imageUrl: "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1000&q=80",
       "https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?w=1000&q=80",
@@ -415,7 +440,12 @@ export const CARS: Car[] = [
     horsepower: 258,
     description:
       "Mercedes-Benz C 200 com acabamento premium e performance excepcional. Carro de luxo em ótimo estado.",
-    features: ["Bancos em Couro", "Teto Solar", "Sistema de Som Burmester", "Assistente de Estacionamento"],
+    features: [
+      "Bancos em Couro",
+      "Teto Solar",
+      "Sistema de Som Burmester",
+      "Assistente de Estacionamento",
+    ],
     condition: "Excellent",
     vin: "WDD2050421F123456",
   },
@@ -427,7 +457,8 @@ export const CARS: Car[] = [
     price: 27990,
     mileage: 22000,
     color: "Gray",
-    imageUrl: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1000&q=80",
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1000&q=80",
@@ -440,7 +471,12 @@ export const CARS: Car[] = [
     horsepower: 160,
     description:
       "Kia Sportage moderno e bem equipado. Design arrojado e ótimo para o dia a dia.",
-    features: ["Banco com Aquecimento", "Carregador Wireless", "Painel Digital", "Faróis em LED"],
+    features: [
+      "Banco com Aquecimento",
+      "Carregador Wireless",
+      "Painel Digital",
+      "Faróis em LED",
+    ],
     condition: "Very Good",
     vin: "5KXU6ARF4PM123456",
   },
@@ -452,7 +488,8 @@ export const CARS: Car[] = [
     price: 32990,
     mileage: 8000,
     color: "White",
-    imageUrl: "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=1000&q=80",
       "https://images.unsplash.com/photo-1663003614492-ee00a13045a9?w=1000&q=80",
@@ -465,7 +502,12 @@ export const CARS: Car[] = [
     horsepower: 126,
     description:
       "Honda HR-V seminovo completo, econômico e com baixa quilometragem. Perfeito para famílias.",
-    features: ["Honda Sensing", "Câmera de Ré", "Apple CarPlay", "Bancos em Couro"],
+    features: [
+      "Honda Sensing",
+      "Câmera de Ré",
+      "Apple CarPlay",
+      "Bancos em Couro",
+    ],
     condition: "Excellent",
     vin: "3CZRZ1H34PM765432",
   },
@@ -477,7 +519,8 @@ export const CARS: Car[] = [
     price: 37990,
     mileage: 10000,
     color: "Silver",
-    imageUrl: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=1000&q=80",
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=1000&q=80",
@@ -490,7 +533,12 @@ export const CARS: Car[] = [
     horsepower: 101,
     description:
       "Toyota Corolla Cross híbrido, econômico e moderno. Tecnologia de ponta com baixo consumo.",
-    features: ["Sistema Híbrido", "Central Multimídia", "Ar Condicionado Digital", "Toyota Safety Sense"],
+    features: [
+      "Sistema Híbrido",
+      "Central Multimídia",
+      "Ar Condicionado Digital",
+      "Toyota Safety Sense",
+    ],
     condition: "Excellent",
     vin: "9BGBB41A60PM876543",
   },
@@ -502,7 +550,8 @@ export const CARS: Car[] = [
     price: 24990,
     mileage: 20000,
     color: "Black",
-    imageUrl: "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1000&q=80",
       "https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?w=1000&q=80",
@@ -527,7 +576,8 @@ export const CARS: Car[] = [
     price: 21990,
     mileage: 30000,
     color: "Blue",
-    imageUrl: "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1000&q=80",
       "https://images.unsplash.com/photo-1544636331-e26879cd4d9b?w=1000&q=80",
@@ -540,7 +590,12 @@ export const CARS: Car[] = [
     horsepower: 150,
     description:
       "Volkswagen T-Cross com visual esportivo e ótimo espaço interno. Perfeito para uso urbano.",
-    features: ["Ar Condicionado Digital", "Sensor de Estacionamento", "Apple CarPlay", "Volante Multifuncional"],
+    features: [
+      "Ar Condicionado Digital",
+      "Sensor de Estacionamento",
+      "Apple CarPlay",
+      "Volante Multifuncional",
+    ],
     condition: "Good",
     vin: "9BWBB35U3MP654321",
   },
@@ -552,7 +607,8 @@ export const CARS: Car[] = [
     price: 17990,
     mileage: 40000,
     color: "Red",
-    imageUrl: "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&q=80",
+    imageUrl:
+      "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=800&q=80",
     images: [
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=1000&q=80",
       "https://images.unsplash.com/photo-1621007947382-bb3c3994e3fb?w=1000&q=80",
@@ -565,7 +621,12 @@ export const CARS: Car[] = [
     horsepower: 123,
     description:
       "Ford EcoSport compacto e versátil. Ideal para quem busca um SUV urbano com bom custo-benefício.",
-    features: ["Central Multimídia", "Câmera de Ré", "Ar Condicionado", "Direção Elétrica"],
+    features: [
+      "Central Multimídia",
+      "Câmera de Ré",
+      "Ar Condicionado",
+      "Direção Elétrica",
+    ],
     condition: "Good",
     vin: "3FADP4BJ0LM123456",
   },

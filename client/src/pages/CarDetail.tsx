@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useParams, useLocation } from "wouter";
 import { useCars } from "@/contexts/CarContext";
 import { Button } from "@/components/ui/button";
@@ -74,13 +74,14 @@ export default function CarDetail() {
     new Intl.NumberFormat("pt-BR").format(m);
 
   const mainSrc = getCarImage(car.id, car.imageUrl);
-  const galleryImages = getCarGallery(car.id, car.images);
+  const galleryImages = useMemo(() => getCarGallery(car.id, car.images), [car.id, car.images]);
+  const handleCloseGallery = useCallback(() => setIsGalleryOpen(false), []);
 
   return (
     <div className="min-h-screen bg-background">
       <div className="sticky top-0 z-10 bg-card/95 backdrop-blur-sm border-b border-border">
         <div className="container py-4">
-          <Button onClick={() => setLocation("/")} variant="ghost" className="text-accent hover:text-primary flex items-center gap-2">
+          <Button onClick={() => setLocation("/")} variant="ghost" className="text-muted-foreground hover:text-accent hover:bg-accent/10 flex items-center gap-2 transition-all">
             <ArrowLeft className="w-4 h-4" /> Voltar ao Catálogo
           </Button>
         </div>
@@ -93,7 +94,11 @@ export default function CarDetail() {
         ]} />
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
           <div className="lg:col-span-2">
-            <div className="rounded-2xl overflow-hidden shadow-lg mb-6 relative group cursor-pointer" onClick={() => setIsGalleryOpen(true)}>
+            <button
+              className="rounded-2xl overflow-hidden shadow-lg mb-6 relative group cursor-pointer w-full text-left"
+              onClick={() => setIsGalleryOpen(true)}
+              aria-label="Abrir galeria de imagens"
+            >
               {mainFailed ? (
                 <div className="w-full h-96 md:h-[500px] flex items-center justify-center bg-muted">
                   <div className="text-center">
@@ -105,16 +110,18 @@ export default function CarDetail() {
                 <img
                   src={mainSrc}
                   alt={`${car.year} ${car.make} ${car.model}`}
+                  width={800}
+                  height={500}
                   className="w-full h-96 md:h-[500px] object-cover group-hover:brightness-75 transition-all duration-300"
                   onError={() => setMainFailed(true)}
                 />
               )}
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                 <div className="bg-white/90 text-foreground px-4 py-2 rounded-lg flex items-center gap-2 font-semibold">
                   <MagnifyingGlassPlus className="w-5 h-5" /> Clique para ver a galeria
                 </div>
               </div>
-            </div>
+            </button>
           </div>
 
           <div className="bg-card rounded-2xl p-6 shadow-lg h-fit sticky top-24">
@@ -193,7 +200,7 @@ export default function CarDetail() {
         isOpen={isGalleryOpen}
         images={galleryImages}
         carTitle={`${car.year} ${car.make} ${car.model}`}
-        onClose={() => setIsGalleryOpen(false)}
+        onClose={handleCloseGallery}
       />
     </div>
   );

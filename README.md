@@ -2,6 +2,14 @@
 
 A modern, fully functional used car catalog web application built with React, TypeScript, and Tailwind CSS. Features a clean, elegant design with comprehensive filtering, search capabilities, and detailed car information pages.
 
+> **Live Demo:** [used-car-catalog.vercel.app](https://used-car-catalog.vercel.app)
+
+<p align="center">
+  <img src="https://github.com/RFernandes10/used-car-catalog/raw/main/screenshot.png" alt="Used Car Catalog Preview" width="100%" />
+</p>
+
+## Design Philosophy
+
 ## Design Philosophy
 
 This application follows a **Contemporary Elegant** design approach with:

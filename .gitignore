@@ -111,3 +111,5 @@ temp/
 # Manus runtime artifacts (debug logs, version files)
 .manus-logs/
 client/public/__manus__/
+
+.vercel

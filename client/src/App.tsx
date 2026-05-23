@@ -25,8 +25,12 @@ const Comparison = lazy(() => import("./pages/Comparison"));
 
 function PageLoader() {
   return (
-    <div className="min-h-[60vh] flex items-center justify-center">
-      <SpinnerGap className="w-8 h-8 text-primary animate-spin" />
+    <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
+      <div className="relative">
+        <SpinnerGap className="w-10 h-10 text-primary animate-spin" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/10 to-transparent blur-xl animate-pulse-soft" />
+      </div>
+      <p className="text-sm text-muted-foreground animate-pulse-soft">Carregando...</p>
     </div>
   );
 }

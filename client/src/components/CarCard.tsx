@@ -57,8 +57,8 @@ export const CarCard: React.FC<CarCardProps> = ({ car, index = 0 }) => {
           onClick={handleFavorite}
           className={`absolute top-2 right-2 z-20 p-1.5 rounded-full transition-all duration-200 ${
             favorited
-              ? "bg-red-500/20 text-red-500 hover:bg-red-500/30"
-              : "bg-card/80 text-muted-foreground hover:text-red-400 hover:bg-card"
+              ? "bg-red-500/20 text-red-500 hover:bg-red-500/30 scale-110"
+              : "bg-card/80 text-muted-foreground hover:text-red-400 hover:bg-card opacity-0 group-hover:opacity-100"
           }`}
           aria-label={favorited ? "Remover dos favoritos" : "Adicionar aos favoritos"}
         >
@@ -77,15 +77,18 @@ export const CarCard: React.FC<CarCardProps> = ({ car, index = 0 }) => {
                 <ImageBroken className="w-10 h-10 text-muted-foreground/50" />
               </div>
             ) : (
-              <img
-                src={src}
-                alt={`${car.year} ${car.make} ${car.model}`}
-                width={400}
-                height={300}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-                onError={() => setImgFailed(true)}
-              />
+              <div className="relative w-full h-full">
+                <img
+                  src={src}
+                  alt={`${car.year} ${car.make} ${car.model}`}
+                  width={400}
+                  height={300}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  onError={() => setImgFailed(true)}
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
             )}
             <div className="absolute top-2 left-12 bg-card/90 text-foreground px-2.5 py-0.5 rounded-md text-xs font-medium border border-border/50">
               {car.condition === "Excellent" ? "Excelente" : car.condition === "Good" ? "Bom" : car.condition}
@@ -131,12 +134,12 @@ export const CarCard: React.FC<CarCardProps> = ({ car, index = 0 }) => {
             onClick={handleCompare}
             disabled={compareDisabled}
             aria-label={comparing ? "Remover da comparação" : compareDisabled ? "Limite de 3 comparações atingido" : "Adicionar para comparar"}
-            className={`flex items-center gap-1.5 text-xs transition-colors ${
+            className={`flex items-center gap-1.5 text-xs transition-all duration-200 ${
               comparing
                 ? "text-primary"
                 : compareDisabled
                   ? "text-muted-foreground/40 cursor-not-allowed"
-                  : "text-muted-foreground hover:text-primary"
+                  : "text-muted-foreground hover:text-primary opacity-0 group-hover:opacity-100"
             }`}
           >
             <ArrowsLeftRight weight={comparing ? "fill" : "regular"} className="w-3.5 h-3.5" />
